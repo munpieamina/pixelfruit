@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#17101d">
+    <meta name="description" content="Pixel Fruit — пиксельная аркада про фруктовые взмахи">
+    <title>Pixel Fruit</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="brand">
+        <span class="brand-fruit" aria-hidden="true">✦</span>
+        <span>PIXEL <b>FRUIT</b></span>
+        <span class="brand-fruit" aria-hidden="true">✦</span>
+      </header>
+
+      <section class="game-frame" aria-label="Игровая сцена">
+        <canvas id="gameCanvas" aria-label="Игровое поле"></canvas>
+
+        <div class="hud" id="hud" hidden>
+          <div class="hud-score">
+            <small>СЧЁТ</small>
+            <strong id="scoreValue">0</strong>
+          </div>
+          <div class="hud-right">
+            <div class="lives" id="lives" aria-label="Жизни">♥ ♥ ♥</div>
+            <div class="multiplier" id="multiplier" hidden>
+              ×2 <span id="bonusTimer">5.0</span>
+            </div>
+            <div class="hud-actions">
+              <button class="mini-button" id="pauseButton" aria-label="Пауза" title="Пауза">Ⅱ</button>
+              <button class="mini-button" id="exitButton" aria-label="В меню" title="В меню">⌂</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="screen" id="menuScreen" aria-label="Главное меню">
+          <div class="pixel-burst" aria-hidden="true">✦ ✧ ✦</div>
+          <p class="eyebrow">ПИКСЕЛЬНАЯ АРКАДА</p>
+          <h1>PIXEL<br><span>FRUIT</span></h1>
+          <p class="tagline">РЕЖЬ ФРУКТЫ. ЛОВИ КОМБО.</p>
+          <div class="button-stack">
+            <button class="primary" id="startButton">НАЧАТЬ <span>▶</span></button>
+            <button class="secondary" id="recordsButton">РЕКОРДЫ</button>
+            <button class="text-button" id="quitButton">ВЫХОД</button>
+          </div>
+          <div class="menu-best">ЛУЧШИЙ СЧЁТ <b id="menuBest">0</b></div>
+        </section>
+
+        <section class="screen" id="pauseScreen" hidden aria-label="Пауза">
+          <p class="eyebrow">ПЕРЕДЫШКА</p>
+          <h2>ПАУЗА</h2>
+          <p class="tagline">ФРУКТЫ ПОДОЖДУТ.</p>
+          <div class="button-stack">
+            <button class="primary" id="resumeButton">ПРОДОЛЖИТЬ ▶</button>
+            <button class="secondary" id="restartButton">НАЧАТЬ ЗАНОВО</button>
+            <button class="text-button" id="pauseMenuButton">В МЕНЮ</button>
+          </div>
+        </section>
+
+        <section class="screen" id="overScreen" hidden aria-label="Конец игры">
+          <p class="eyebrow">РАУНД ЗАВЕРШЁН</p>
+          <h2 id="overTitle">ХОРОШИЙ ВЗМАХ!</h2>
+          <p class="result-score" id="finalScore">0</p>
+          <p class="tagline">ТВОЙ СЧЁТ</p>
+          <p class="new-record" id="newRecord" hidden>★ НОВЫЙ РЕКОРД! ★</p>
+          <p class="best-line">ЛУЧШИЙ: <b id="finalBest">0</b></p>
+          <div class="button-stack">
+            <button class="primary" id="againButton">ИГРАТЬ СНОВА ↻</button>
+            <button class="secondary" id="overMenuButton">В МЕНЮ</button>
+          </div>
+        </section>
+
+        <section class="screen" id="recordsScreen" hidden aria-label="Рекорды">
+          <p class="eyebrow">ТВОИ ДОСТИЖЕНИЯ</p>
+          <h2>РЕКОРДЫ</h2>
+          <ol class="record-list" id="recordList"></ol>
+          <p class="records-empty" id="recordsEmpty">Пока пусто. Пора за фруктами!</p>
+          <div class="button-stack">
+            <button class="secondary" id="clearRecordsButton">ОЧИСТИТЬ ИСТОРИЮ</button>
+            <button class="primary" id="recordsBackButton">НАЗАД</button>
+          </div>
+        </section>
+
+        <div class="orientation-hint" id="orientationHint" hidden>
+          ↻ ПОВЕРНИ УСТРОЙСТВО ДЛЯ УДОБНОЙ ИГРЫ
+        </div>
+        <section class="screen" id="portraitScreen" hidden aria-label="Подсказка об ориентации">
+          <div class="rotate-icon">▱ ↻</div>
+          <h2>ПОВЕРНИ УСТРОЙСТВО</h2>
+          <p class="tagline">В ГОРИЗОНТАЛЬНОМ РЕЖИМЕ РЕЗАТЬ УДОБНЕЕ</p>
+          <button class="secondary" id="portraitContinue">ВСЁ РАВНО ИГРАТЬ</button>
+        </section>
+      </section>
+
+      <footer class="footer">
+        <span>◈ PIXEL ARCADE</span>
+        <span>СОБЕРИ СВОЁ КОМБО</span>
+        <button id="soundButton" class="sound-button" aria-label="Выключить звук">♫ ЗВУК: ВКЛ</button>
+      </footer>
+      <p class="mobile-hint">Проведи пальцем по фруктам, чтобы разрезать их.</p>
+    </main>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
