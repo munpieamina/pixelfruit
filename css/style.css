@@ -1,0 +1,314 @@
+/* Pixel Fruit — общие цвета и базовая типографика */
+:root {
+  color-scheme: dark;
+  --ink: #f8f0d1;
+  --muted: #b4a6a1;
+  --pink: #ff5b77;
+  --gold: #ffd75e;
+  --violet: #8c55db;
+  --panel: #21162a;
+  --line: #60416d;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  color: var(--ink);
+  background: radial-gradient(ellipse at top, #34213d 0, #17101d 55%, #0d0b12 100%);
+  font-family: "Courier New", monospace;
+  image-rendering: pixelated;
+}
+button { font-family: inherit; }
+button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+[hidden] { display: none !important; }
+
+/* Основная рамка игры */
+.app-shell { width: min(100%, 1120px); }
+.brand {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  font-size: clamp(16px, 2.2vw, 23px);
+  letter-spacing: 3px;
+  text-shadow: 3px 3px #000;
+}
+.brand b { color: var(--gold); }
+.brand-fruit { color: var(--pink); font-size: 28px; }
+.game-frame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  height: min(76vh, 760px);
+  min-height: 460px;
+  border: 4px solid #715078;
+  background: #281b1d;
+  box-shadow: 0 0 0 4px #0c0910, 0 14px 0 #0b080d, 0 22px 50px #0009;
+}
+.game-frame::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  border: 5px solid #ffffff0a;
+  pointer-events: none;
+}
+canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  image-rendering: pixelated;
+}
+
+/* HTML-экраны поверх Canvas */
+.screen {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 30px 24px;
+  text-align: center;
+  background: linear-gradient(180deg, #160e1ad9, #1c101adf 70%, #160e1af0);
+}
+.pixel-burst {
+  margin: 0 0 22px;
+  color: var(--gold);
+  font-size: 30px;
+  letter-spacing: 14px;
+  text-shadow: 3px 3px #7c3b75;
+}
+.eyebrow {
+  margin: 0 0 20px;
+  color: #d2a8f7;
+  font-size: clamp(12px, 1.5vw, 15px);
+  letter-spacing: 2px;
+}
+.screen h1 {
+  margin: 0;
+  color: #fff1c9;
+  font-size: clamp(44px, 7vw, 78px);
+  line-height: 1.18;
+  letter-spacing: 2px;
+  text-shadow: 5px 5px #7e315e, 9px 9px #321c39;
+}
+.screen h1 span { color: var(--gold); }
+.screen h2 {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font-size: clamp(25px, 3.4vw, 36px);
+  line-height: 1.4;
+  text-shadow: 3px 3px #5d285c;
+}
+.tagline {
+  margin: 16px 0 24px;
+  color: #d3c2d5;
+  font-size: clamp(12px, 1.7vw, 16px);
+  line-height: 1.8;
+}
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  width: min(100%, 390px);
+  margin-top: 10px;
+}
+.button-stack button, .screen > button {
+  min-height: 60px;
+  padding: 16px 18px;
+  border: 3px solid #fff0c7;
+  color: #fff6d9;
+  font-size: clamp(14px, 1.8vw, 17px);
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 4px 4px #09070d;
+  transition: transform .1s, filter .1s;
+  touch-action: manipulation;
+}
+.button-stack button:hover, .screen > button:hover { filter: brightness(1.12); }
+.button-stack button:active, .screen > button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px #09070d;
+}
+.primary { background: #df476d; }
+.primary span { float: right; }
+.secondary { background: #49325d; }
+.text-button {
+  min-height: 48px !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #c8b4ce !important;
+}
+.menu-best { margin-top: 22px; color: #b6a1b9; font-size: 13px; }
+.menu-best b { margin-left: 8px; color: var(--gold); }
+
+/* Игровой HUD: крупные очки, жизни и кнопки */
+.hud {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 22px;
+  pointer-events: none;
+  text-shadow: 2px 2px #150d1b, 0 0 12px #000;
+}
+.hud-score { display: flex; flex-direction: column; gap: 7px; }
+.hud small { color: #f5e7df; font-size: clamp(13px, 1.7vw, 17px); letter-spacing: 2px; }
+.hud-score strong {
+  color: #fff2bd;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.1;
+}
+.hud-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+.lives {
+  color: #ff5774;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: 5px;
+  white-space: nowrap;
+  filter: drop-shadow(0 2px 0 #5c132d);
+}
+.multiplier {
+  padding: 10px 14px;
+  border: 3px solid #ffdc6d;
+  background: #553b86ed;
+  color: #ffec9d;
+  font-size: clamp(16px, 2vw, 21px);
+}
+.multiplier span { margin-left: 7px; color: white; font-size: .85em; }
+.hud-actions { display: flex; gap: 10px; pointer-events: auto; }
+.mini-button {
+  width: 54px;
+  height: 54px;
+  border: 3px solid #b08ac8;
+  background: #2c1d3ae8;
+  color: #fff0c7;
+  font-size: 25px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Рекорды, итоговый экран и подсказки */
+.result-score {
+  margin: 12px 0 0;
+  color: #fff1be;
+  font-size: clamp(46px, 8vw, 68px);
+  text-shadow: 4px 4px #d33c72;
+}
+.new-record {
+  margin: 12px 0 0;
+  color: var(--gold);
+  font-size: 15px;
+  animation: blink .8s steps(2) infinite;
+}
+.best-line { margin: 6px 0 16px; color: #c9b8d0; font-size: 14px; }
+.best-line b { color: var(--gold); }
+.record-list {
+  width: min(100%, 480px);
+  max-height: 260px;
+  overflow: auto;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+.record-list li {
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 5px;
+  border-bottom: 1px solid #60436a;
+  font-size: 14px;
+}
+.record-list li:first-child { color: var(--gold); }
+.record-date { display: block; margin-top: 6px; color: #a08da8; font-size: 12px; line-height: 1.5; }
+.record-points { color: #fff1bd; }
+.records-empty { color: #b9a6bf; font-size: 14px; line-height: 1.8; }
+.rotate-icon { margin-bottom: 22px; color: var(--gold); font-size: 54px; }
+.orientation-hint {
+  position: absolute;
+  z-index: 2;
+  top: 48%;
+  left: 8%;
+  right: 8%;
+  padding: 14px;
+  border: 2px solid #d2a8f7;
+  background: #1b1124d9;
+  color: #ffe59a;
+  font-size: 13px;
+  line-height: 1.8;
+  text-align: center;
+  pointer-events: none;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 20px 4px 0;
+  color: #aa96b0;
+  font-size: 12px;
+}
+.sound-button {
+  padding: 11px 13px;
+  border: 1px solid #57445f;
+  background: #21162a;
+  color: #e7d4ed;
+  font-size: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.mobile-hint { display: none; }
+@keyframes blink { 50% { opacity: .4; } }
+
+/* Компактная раскладка для телефонов */
+@media (max-width: 600px) {
+  body { padding: 7px; }
+  .brand { height: 42px; gap: 12px; font-size: 15px; }
+  .brand-fruit { font-size: 22px; }
+  .game-frame { height: calc(100svh - 125px); min-height: 470px; border-width: 3px; }
+  .screen { padding: 18px 13px; }
+  .screen h1 { font-size: clamp(42px, 12vw, 60px); }
+  .screen h2 { font-size: clamp(24px, 7vw, 32px); }
+  .pixel-burst { font-size: 24px; margin-bottom: 14px; }
+  .eyebrow { margin-bottom: 12px; font-size: 12px; }
+  .tagline { margin: 12px 0 16px; font-size: 12px; }
+  .button-stack { width: min(100%, 340px); gap: 10px; }
+  .button-stack button, .screen > button { min-height: 55px; padding: 13px; font-size: 14px; }
+  .hud { padding: 13px; }
+  .hud-score strong { font-size: 30px; }
+  .hud small { font-size: 12px; }
+  .lives { font-size: 27px; letter-spacing: 2px; }
+  .hud-right { gap: 8px; }
+  .hud-actions { gap: 6px; }
+  .mini-button { width: 46px; height: 46px; font-size: 22px; }
+  .multiplier { padding: 7px 9px; font-size: 15px; }
+  .footer { padding-top: 12px; font-size: 10px; flex-wrap: wrap; }
+  .footer > span:nth-child(2) { display: none; }
+  .sound-button { padding: 9px 10px; font-size: 11px; }
+  .mobile-hint { display: block; margin: 9px 0 0; color: #a998ad; font-size: 11px; line-height: 1.6; text-align: center; }
+  .record-list li { font-size: 13px; }
+  .record-date { font-size: 11px; }
+}
+@media (orientation: portrait) and (max-width: 700px) {
+  .game-frame { height: calc(100svh - 140px); min-height: 470px; }
+  .orientation-hint:not([hidden]) { display: block; }
+}
